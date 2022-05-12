@@ -3,7 +3,7 @@ import "../scss/login.scss";
 import { signInWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -45,10 +45,13 @@ const Login = () => {
         </div>
         <button className="btn btn-login">Login</button>
       </form>
-      <div className="login-social">
+      <Link to="/register" className="a">
+        you don't have an account
+      </Link>
+      {/* <div className="login-social">
         <button className="btn">Login bang fb</button>
         <button className="btn">Login bang gg</button>
-      </div>
+      </div> */}
     </div>
   );
 };
