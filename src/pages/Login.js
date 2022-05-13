@@ -13,6 +13,8 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const fb = FacebookAuthProvider;
+  const gg = GoogleAuthProvider;
 
   const hanldeSubmit = async (e) => {
     e.preventDefault();
@@ -26,28 +28,28 @@ const Login = () => {
     }
   };
 
-  const signFb = async () => {
-    const provider = await new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((re) => {
-        if (re.user) {
-          console.log(re.user);
-          toast.success("Signin Fb successfully", { position: "top-right" });
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+  // const signFb = async () => {
+  //   const provider = await new FacebookAuthProvider();
+  //   signInWithPopup(auth, provider)
+  //     .then((re) => {
+  //       if (re.user) {
+  //         console.log(re.user);
+  //         toast.success("Signin Fb successfully", { position: "top-right" });
+  //         setTimeout(() => {
+  //           navigate("/");
+  //         }, 2000);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // };
 
-  const signInWithGoogle = async () => {
-    const logingg = await new GoogleAuthProvider();
+  const hanldeLogin = async (login) => {
+    const logingg = await new login();
     signInWithPopup(auth, logingg)
       .then((er) => {
         if (er.user) {
           console.log(er.user);
-          toast.success("Signin Gg successfully", { position: "top-right" });
+          toast.success("Signin  successfully", { position: "top-right" });
           setTimeout(() => {
             navigate("/");
           }, 2000);
@@ -85,10 +87,10 @@ const Login = () => {
         you don't have an account
       </Link>
       <div className="login-social">
-        <button onClick={signFb} className="btn">
+        <button onClick={() => hanldeLogin(fb)} className="btn">
           Login bang fb
         </button>
-        <button onClick={signInWithGoogle} className="btn">
+        <button onClick={() => hanldeLogin(gg)} className="btn">
           Login bang gg
         </button>
       </div>
