@@ -28,21 +28,6 @@ const Login = () => {
     }
   };
 
-  // const signFb = async () => {
-  //   const provider = await new FacebookAuthProvider();
-  //   signInWithPopup(auth, provider)
-  //     .then((re) => {
-  //       if (re.user) {
-  //         console.log(re.user);
-  //         toast.success("Signin Fb successfully", { position: "top-right" });
-  //         setTimeout(() => {
-  //           navigate("/");
-  //         }, 2000);
-  //       }
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   const hanldeLogin = async (login) => {
     const logingg = await new login();
     signInWithPopup(auth, logingg)
@@ -55,7 +40,7 @@ const Login = () => {
           }, 2000);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
   return (
     <div className="form-login">
