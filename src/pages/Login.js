@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   FacebookAuthProvider,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
@@ -18,16 +19,28 @@ const Login = () => {
     const used = await signInWithEmailAndPassword(auth, email, password);
 
     toast.success("Signin successfully", { position: "top-right" });
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
+    if (used) {
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    }
   };
 
-  const signFb = () => {
-    const provider = new FacebookAuthProvider();
+  const signFb = async () => {
+    const provider = await new FacebookAuthProvider();
     signInWithPopup(auth, provider)
       .then((re) => console.log(re))
       .catch((err) => console.log(err));
+    toast.success("login fb success", { position: "top-right" });
+    navigate("/");
+  };
+
+  const signInWithGoogle = async () => {
+    const logingg = await new GoogleAuthProvider();
+    signInWithPopup(auth, logingg)
+      .then((er) => console.log(er))
+      .catch((err) => console.log(err));
+    navigate("/");
   };
   return (
     <div className="form-login">
@@ -62,7 +75,9 @@ const Login = () => {
         <button onClick={signFb} className="btn">
           Login bang fb
         </button>
-        <button className="btn">Login bang gg</button>
+        <button onClick={signInWithGoogle} className="btn">
+          Login bang gg
+        </button>
       </div>
     </div>
   );
