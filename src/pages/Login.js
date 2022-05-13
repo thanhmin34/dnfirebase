@@ -17,9 +17,9 @@ const Login = () => {
   const hanldeSubmit = async (e) => {
     e.preventDefault();
     const used = await signInWithEmailAndPassword(auth, email, password);
-
-    toast.success("Signin successfully", { position: "top-right" });
+    console.log(used);
     if (used) {
+      toast.success("Signin successfully", { position: "top-right" });
       setTimeout(() => {
         navigate("/");
       }, 2000);
@@ -28,24 +28,32 @@ const Login = () => {
 
   const signFb = async () => {
     const provider = await new FacebookAuthProvider();
-    const a = await signInWithPopup(auth, provider)
-      .then((re) => console.log(re))
+    signInWithPopup(auth, provider)
+      .then((re) => {
+        if (re.user) {
+          console.log(re.user);
+          toast.success("Signin Fb successfully", { position: "top-right" });
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+        }
+      })
       .catch((err) => console.log(err));
-    await toast.success("login fb success", { position: "top-right" });
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
   };
 
   const signInWithGoogle = async () => {
     const logingg = await new GoogleAuthProvider();
-    await signInWithPopup(auth, logingg)
-      .then((er) => console.log(er))
+    signInWithPopup(auth, logingg)
+      .then((er) => {
+        if (er.user) {
+          console.log(er.user);
+          toast.success("Signin Gg successfully", { position: "top-right" });
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+        }
+      })
       .catch((err) => console.log(err));
-    await toast.success("login gg success", { position: "top-right" });
-    setTimeout(() => {
-      navigate("/");
-    }, 2000);
   };
   return (
     <div className="form-login">
