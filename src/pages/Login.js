@@ -28,19 +28,24 @@ const Login = () => {
 
   const signFb = async () => {
     const provider = await new FacebookAuthProvider();
-    signInWithPopup(auth, provider)
+    const a = await signInWithPopup(auth, provider)
       .then((re) => console.log(re))
       .catch((err) => console.log(err));
-    toast.success("login fb success", { position: "top-right" });
-    navigate("/");
+    await toast.success("login fb success", { position: "top-right" });
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
 
   const signInWithGoogle = async () => {
     const logingg = await new GoogleAuthProvider();
-    signInWithPopup(auth, logingg)
+    await signInWithPopup(auth, logingg)
       .then((er) => console.log(er))
       .catch((err) => console.log(err));
-    navigate("/");
+    await toast.success("login gg success", { position: "top-right" });
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
   return (
     <div className="form-login">
