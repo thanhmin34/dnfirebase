@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "../scss/login.scss";
-import { signInWithEmailAndPassword, GoogleAuthProvider } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  FacebookAuthProvider,
+} from "firebase/auth";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,6 +23,12 @@ const Login = () => {
     }, 2000);
   };
 
+  const signFb = () => {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((re) => console.log(re))
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="form-login">
       <h2>Login </h2>
@@ -48,10 +58,12 @@ const Login = () => {
       <Link to="/register" className="a">
         you don't have an account
       </Link>
-      {/* <div className="login-social">
-        <button className="btn">Login bang fb</button>
+      <div className="login-social">
+        <button onClick={signFb} className="btn">
+          Login bang fb
+        </button>
         <button className="btn">Login bang gg</button>
-      </div> */}
+      </div>
     </div>
   );
 };
