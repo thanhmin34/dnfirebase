@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const navigate = useNavigate();
+  const [used, setUsed] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const fb = FacebookAuthProvider;
@@ -34,14 +35,18 @@ const Login = () => {
       .then((er) => {
         if (er.user) {
           console.log(er.user);
+          setUsed(er.user);
           toast.success("Signin  successfully", { position: "top-right" });
           setTimeout(() => {
             navigate("/");
           }, 2000);
         }
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   return (
     <div className="form-login">
       <h2>Login </h2>
@@ -75,6 +80,7 @@ const Login = () => {
         <button onClick={() => hanldeLogin(fb)} className="btn">
           Login bang fb
         </button>
+
         <button onClick={() => hanldeLogin(gg)} className="btn">
           Login bang gg
         </button>
