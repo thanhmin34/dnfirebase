@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from "firebase/auth";
+import { useForm } from "react-hook-form";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
@@ -33,7 +34,7 @@ const Login = () => {
       .then((er) => {
         if (er.user) {
           setUsed(er.user);
-          // console.log(er.user);
+          console.log(er.user);
           toast.success("Signin  successfully", { position: "top-right" });
         }
       })
@@ -41,7 +42,7 @@ const Login = () => {
         console.log(err);
       });
   };
-  // console.log(used);
+
   return (
     <div className="form-login">
       <h2>Login </h2>

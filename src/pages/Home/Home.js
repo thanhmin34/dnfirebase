@@ -17,7 +17,7 @@ const Home = () => {
 
     // toast.success("Signin successfully", { position: "top-right" });
   };
-  console.log(used);
+  // console.log(used);
   return (
     <div>
       <div className="log">
