@@ -69,7 +69,7 @@ const Login = () => {
             name="password"
             onChange={(e) => setPassword(e.target.value)}
             className=""
-            placeholder="enter you email"
+            placeholder="enter you password"
           />
         </div>
         <button className="btn btn-login">Login</button>
@@ -79,11 +79,11 @@ const Login = () => {
       </Link>
       <div className="login-social">
         <button onClick={() => hanldeLogin(fb)} className="btn ">
-          <FaFacebookSquare /> <span className="ml-2">Login bang fb</span>
+          <FaFacebookSquare /> <span className="ml-2">Login with Facebook</span>
         </button>
 
         <button onClick={() => hanldeLogin(gg)} className="btn ">
-          <FcGoogle /> <span className="ml-2">Login bang Gg</span>
+          <FcGoogle /> <span className="ml-2">Login with Google</span>
         </button>
       </div>
     </div>
