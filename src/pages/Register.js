@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase/config";
+import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+
 const Register = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [values, setValues] = useState({ email: "", pass: "" });
+  const hanldeChang = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   const hanldeRegister = async (e) => {
     e.preventDefault();
-
-    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    const cred = await createUserWithEmailAndPassword(
+      auth,
+      values.email,
+      values.pass
+    );
     console.log("cred", cred);
     toast.success("register successfully", {
       position: "top-right",
     });
-    setTimeout(() => {
-      navigate("/");
-    }, 3000);
   };
+  console.log(values);
   return (
     <div className="form-login">
       <h2>Register </h2>
@@ -28,8 +30,8 @@ const Register = () => {
           <label htmlFor="">Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={values.email}
+            onChange={hanldeChang}
             name="email"
             placeholder="enter you email"
           />
@@ -38,9 +40,9 @@ const Register = () => {
           <label htmlFor="">Password</label>
           <input
             type="password"
-            value={pass}
-            name="password"
-            onChange={(e) => setPass(e.target.value)}
+            value={values.pass}
+            name="pass"
+            onChange={hanldeChang}
             placeholder="enter you password"
           />
         </div>

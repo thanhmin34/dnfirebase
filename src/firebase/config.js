@@ -4,12 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBadOeDL8iAqi-GHK4T0FI5jWgUfXznN5I",
-  authDomain: "movies-c1aa7.firebaseapp.com",
-  projectId: "movies-c1aa7",
-  storageBucket: "movies-c1aa7.appspot.com",
-  messagingSenderId: "282828257849",
-  appId: "1:282828257849:web:dfeb01a4042a6b2ece2be8",
+  apiKey: "AIzaSyDhBu8f8gr8WOPnlKIcpt4dsXAlMS2Jd58",
+  authDomain: "thanhmin-25fd7.firebaseapp.com",
+  projectId: "thanhmin-25fd7",
+  storageBucket: "thanhmin-25fd7.appspot.com",
+  messagingSenderId: "406209263692",
+  appId: "1:406209263692:web:bcee863724434644d09ce9",
+  measurementId: "G-GBP1WJXRZE",
 };
 
 // Initialize Firebase

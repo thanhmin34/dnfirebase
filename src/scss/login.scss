@@ -49,6 +49,10 @@
   outline: none;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 .form-login .btn:hover {
   opacity: 0.85;

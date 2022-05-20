@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import "../scss/login.scss";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import {
   signInWithEmailAndPassword,
   signInWithPopup,
   FacebookAuthProvider,
   GoogleAuthProvider,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Login = () => {
-  const navigate = useNavigate();
   const [used, setUsed] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,33 +22,26 @@ const Login = () => {
   const hanldeSubmit = async (e) => {
     e.preventDefault();
     const used = await signInWithEmailAndPassword(auth, email, password);
-    console.log(used);
     if (used) {
       toast.success("Signin successfully", { position: "top-right" });
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
     }
   };
 
   const hanldeLogin = async (login) => {
     const logingg = await new login();
-    signInWithPopup(auth, logingg)
+    const used = await signInWithPopup(auth, logingg)
       .then((er) => {
         if (er.user) {
-          console.log(er.user);
           setUsed(er.user);
+          // console.log(er.user);
           toast.success("Signin  successfully", { position: "top-right" });
-          setTimeout(() => {
-            navigate("/");
-          }, 2000);
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  // console.log(used);
   return (
     <div className="form-login">
       <h2>Login </h2>
@@ -77,12 +72,12 @@ const Login = () => {
         you don't have an account
       </Link>
       <div className="login-social">
-        <button onClick={() => hanldeLogin(fb)} className="btn">
-          Login bang fb
+        <button onClick={() => hanldeLogin(fb)} className="btn ">
+          <FaFacebookSquare /> <span className="ml-2">Login bang fb</span>
         </button>
 
-        <button onClick={() => hanldeLogin(gg)} className="btn">
-          Login bang gg
+        <button onClick={() => hanldeLogin(gg)} className="btn ">
+          <FcGoogle /> <span className="ml-2">Login bang Gg</span>
         </button>
       </div>
     </div>

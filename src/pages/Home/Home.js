@@ -1,14 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/config";
 import styled from "./home.module.scss";
+import { signOut } from "firebase/auth";
+import { useAuth } from "../../context/AuthProvider";
+import { toast } from "react-toastify";
+
 const Home = () => {
+  const navigate = useNavigate();
+  const { used } = useAuth();
+
+  const hanldeSignOut = async () => {
+    await auth.signOut();
+    toast.error("success", { position: "top-right" });
+    await navigate("/login");
+
+    // toast.success("Signin successfully", { position: "top-right" });
+  };
+  console.log(used);
   return (
     <div>
       <div className="log">
-        <h1>Chào mừng bạn đến với Trang chủ</h1>
-        <Link to="/login" className="a">
-          login
-        </Link>
+        {used.displayName ? (
+          <h1>Chào mừng {used.displayName} đến với Avatar 2</h1>
+        ) : (
+          <h1>Chào mừng bạn đến với Avatar hãy đăng nhập để tận hưởng</h1>
+        )}
+        {used.displayName ? (
+          <button className="btn-logOut" onClick={hanldeSignOut}>
+            SignOut
+          </button>
+        ) : (
+          <button onClick={() => navigate("/login")} className="btn-logOut">
+            login
+          </button>
+        )}
       </div>
       <div className={styled.used}>
         <div className="info-used">
@@ -18,7 +44,6 @@ const Home = () => {
           />
           {/* <span>Minh Hoang</span> */}
         </div>
-        {/* <button>SignOut</button> */}
       </div>
     </div>
   );
