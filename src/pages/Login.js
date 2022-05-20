@@ -13,7 +13,9 @@ import { useForm } from "react-hook-form";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
+  const navigate = useNavigate();
   const [used, setUsed] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +27,9 @@ const Login = () => {
     const used = await signInWithEmailAndPassword(auth, email, password);
     if (used) {
       toast.success("Signin successfully", { position: "top-right" });
+      await navigate("/");
     }
+    // console.log(used);
   };
 
   const hanldeLogin = async (login) => {
@@ -36,6 +40,7 @@ const Login = () => {
           setUsed(er.user);
           console.log(er.user);
           toast.success("Signin  successfully", { position: "top-right" });
+          navigate("/");
         }
       })
       .catch((err) => {

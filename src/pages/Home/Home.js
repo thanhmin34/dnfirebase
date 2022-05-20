@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 const Home = () => {
   const navigate = useNavigate();
   const { used } = useAuth();
+  // console.log(used);
 
   const hanldeSignOut = async () => {
     await auth.signOut();
@@ -21,12 +22,12 @@ const Home = () => {
   return (
     <div>
       <div className="log">
-        {used.displayName ? (
-          <h1>Chào mừng {used.displayName} đến với Avatar 2</h1>
+        {used.displayName || used.email ? (
+          <h1>Chào mừng {used.displayName || used.email} đến với Avatar 2</h1>
         ) : (
           <h1>Chào mừng bạn đến với Avatar hãy đăng nhập để tận hưởng</h1>
         )}
-        {used.displayName ? (
+        {used.displayName || used.email ? (
           <button className="btn-logOut" onClick={hanldeSignOut}>
             SignOut
           </button>

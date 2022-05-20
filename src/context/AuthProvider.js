@@ -10,11 +10,12 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
+      // console.log(user);
       if (user) {
         const { displayName, email, uid, photoURL } = user;
         setUsed({ displayName, email, uid, photoURL });
         setLoading(false);
-        navigate("/");
+        // navigate("/");
         return;
       }
       // navigate("/login");
