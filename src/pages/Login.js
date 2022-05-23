@@ -12,13 +12,13 @@ import {
 import { useForm } from "react-hook-form";
 import { auth } from "../firebase/config";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Login = () => {
-  const navigate = useNavigate();
   const [used, setUsed] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate("");
   const fb = FacebookAuthProvider;
   const gg = GoogleAuthProvider;
 
@@ -27,9 +27,8 @@ const Login = () => {
     const used = await signInWithEmailAndPassword(auth, email, password);
     if (used) {
       toast.success("Signin successfully", { position: "top-right" });
-      await navigate("/");
+      navigate("/");
     }
-    // console.log(used);
   };
 
   const hanldeLogin = async (login) => {
@@ -79,11 +78,11 @@ const Login = () => {
       </Link>
       <div className="login-social">
         <button onClick={() => hanldeLogin(fb)} className="btn ">
-          <FaFacebookSquare /> <span className="ml-2">Login with Facebook</span>
+          <FaFacebookSquare /> <span className="ml-2">Login bang fb</span>
         </button>
 
         <button onClick={() => hanldeLogin(gg)} className="btn ">
-          <FcGoogle /> <span className="ml-2">Login with Google</span>
+          <FcGoogle /> <span className="ml-2">Login bang Gg</span>
         </button>
       </div>
     </div>
