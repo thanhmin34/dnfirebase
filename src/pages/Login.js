@@ -73,16 +73,19 @@ const Login = () => {
         </div>
         <button className="btn btn-login">Login</button>
       </form>
-      <Link to="/register" className="a">
-        you don't have an account
-      </Link>
+      <span className="a">
+        you don't have an account?{" "}
+        <Link className="ml-1" to="/register">
+          Register!
+        </Link>
+      </span>
       <div className="login-social">
         <button onClick={() => hanldeLogin(fb)} className="btn ">
-          <FaFacebookSquare /> <span className="ml-2">Login bang fb</span>
+          <FaFacebookSquare /> <span className="ml-2">Login with Facebook</span>
         </button>
 
         <button onClick={() => hanldeLogin(gg)} className="btn ">
-          <FcGoogle /> <span className="ml-2">Login bang Gg</span>
+          <FcGoogle /> <span className="ml-2">Login with Google</span>
         </button>
       </div>
     </div>
